@@ -59,3 +59,32 @@ ngrok http 5000
 ```
 
 use ngrok url in twilio for your app url
+
+# Deploying
+
+- create docker image
+- save docker image to tar file
+- upload tar file to server
+- unpack tar file
+- run docker container
+
+locally:
+
+```
+docker build -t twilio-ai-assistant .
+docker save -o twilio-ai-assistant.tar twilio-ai-assistant
+scp twilio-ai-assistant.tar root@1.1.1.1:/root/
+```
+
+on the server:
+
+```
+sudo docker load -i twilio-ai-assistant.tar
+sudo docker run --rm -d -p 5000:5000 \
+  -e RAILS_MASTER_KEY=00470d9456f92c1ce0109a28c6ec56e2 \
+  -e TWILIO_ACCOUNT_SID=your_twilio_account_sid \
+  -e TWILIO_AUTH_TOKEN=your_twilio_auth_token \
+  -e OPENAI_API_KEY_PROJECT=your_openai_api_key \
+  -e ELEVENLABS_API_KEY=your_elevenlabs_api_key \
+  twilio-ai-assistant
+```
