@@ -34,7 +34,7 @@ sequenceDiagram
     Speech-to-Text Service->>Your App: Full call transcript
 ```
 
-![Sequence Diagram](./requirements/seq%20diagram.png)
+![Sequence Diagram](./_requirements/seq%20diagram.png)
 
 # setup for local development aka how to run it on your machine
 
